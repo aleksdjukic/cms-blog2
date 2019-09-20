@@ -1,0 +1,26 @@
+.userpicssize img {
+    max-width: 30%;
+}
+
+.postspicssize img {
+    max-width: 30%;
+    border: 1px solid #5892c52e;
+}
+.postpicssize td {
+    padding: 1rem!important;
+}
+.tadble td {
+    padding: 1rem;
+}
+
+.table td, .table th {
+    padding: 1rem;
+}
+.profiletext {
+    position: relative;
+    margin: auto;
+}
+
+@media only screen and (max-width: 2000px) and (min-width: 1300px)  {
+
+}
