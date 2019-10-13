@@ -79,7 +79,11 @@ class AdminPostsController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $comments = $post->comments()->get();
+
+        $this->authorize('any', $post);
+        return view('post', compact('post', 'comments'));
     }
 
     /**
@@ -90,6 +94,8 @@ class AdminPostsController extends Controller
      */
     public function edit($id){
         $post = Post::findOrFail($id);
+        $this->authorize('any', $post);
+
         return view('admin.posts.edit', compact('post'));
     }
 
@@ -106,13 +112,8 @@ class AdminPostsController extends Controller
     {
         $input = $request->all();
 
-
-
-        if (Gate::denies('update', $input)) {
-            abort(403);
-        }
-
-        // Update Post...
+        $post = Auth::user()->posts()->where('id', $id)->first();
+        $this->authorize('any', $post);
 
 
         if($file = $request->file('photo_id')){
@@ -121,7 +122,8 @@ class AdminPostsController extends Controller
             $photo = Photo::create(['path' => $name]);
             $input['photo_id'] = $photo->id;
         }
-        Auth::user()->posts()->where('id', $id)->first()->update($input);
+
+        $post->update($input);
         return redirect('admin/posts');
 //
 //
@@ -140,6 +142,8 @@ class AdminPostsController extends Controller
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
+        $this->authorize('any', $post);
+
         $post->delete();
 
         Session::flash('deleted_post', 'Post has been deleted');
@@ -147,16 +151,6 @@ class AdminPostsController extends Controller
         return redirect('admin/posts');
     }
 
-    public function post($id){
-        $post = Post::findOrFail($id);
-        $comments = $post->comments()->get();
-        if( !Auth::user()->isAdmin()){
-            if($post->user_id != Auth::user()->id){
-                abort('403');
-            }
-        }
-        return view('post', compact('post', 'comments'));
-    }
     public function posts(){
         $posts = Post::all();
 
