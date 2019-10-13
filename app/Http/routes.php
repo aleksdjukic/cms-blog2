@@ -20,7 +20,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::resource('admin/users', 'AdminUsersController');
     Route::resource('admin/posts', 'AdminPostsController');
     Route::resource('admin/comments', 'PostCommentController');
-    Route::get('/post/{id}', [ 'as' => 'home.post', 'uses' => 'AdminPostsController@post']);
+    Route::get('/post/{id}', [ 'as' => 'home.post', 'uses' => 'AdminPostsController@show']);
     Route::get('/posts', [ 'as' => 'all.posts', 'uses' => 'AdminPostsController@posts']);
     Route::get('/user/{id}', [ 'as' => 'user.profile', 'uses' => 'AdminUsersController@user']);
     Route::post('/search', 'SearchController@search');
