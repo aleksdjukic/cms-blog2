@@ -1,12 +1,19 @@
 # CMS - BLOG (Frontend and Backend)
 
-Instruction for installation
+Instruction for installation:
 
-- Composer install
+- Run composer install
 
--  php artisan key:generate
+- Run php artisan key:generate
 
-- php artisan migrate:refresh --seed
+- Run php artisan migrate:refresh --seed
+
+- Admin email: admin@gmail.com
+- Admin password: adminadmin
+
+- User email: user@gmail.com
+- User password: useruser
+
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
 [![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
